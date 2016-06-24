@@ -12,11 +12,13 @@
 			"RenderType"="Transparent" 
 		}
 		LOD 200
+
+		Cull Off
 		
 		CGPROGRAM
 
 		// Lambert cheap lighting model (this is not a realistic material).
-		// Signal to Ch that this is a transparent shader with alpha:fade.
+		// Signal to Cg that this is a transparent shader with alpha:fade.
 		#pragma surface surf Lambert alpha:fade
 
 		#pragma target 3.0

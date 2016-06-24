@@ -12,7 +12,7 @@
 			"RenderType" = "Transparent"
 		}
 		// Removes back geometry
-		//Cull Off
+		Cull Off
 
 		CGPROGRAM
 		// Alpha blending
@@ -24,7 +24,6 @@
 		struct Input {
 			float2 uv_MainTex;
 		};
-
 
 		void surf(Input IN, inout SurfaceOutputStandard o) {
 			float4 c = tex2D(_MainTex, IN.uv_MainTex) * _Color;
