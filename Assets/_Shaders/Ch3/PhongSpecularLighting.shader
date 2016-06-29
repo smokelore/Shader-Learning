@@ -36,16 +36,17 @@
 		// View-dependent lighting function
 		fixed4 LightingPhong (SurfaceOutput s, fixed3 lightDir, half3 viewDir, fixed atten)
 		{
+			// Diffuse: D = N dot L
 			half NdotL = dot(s.Normal, lightDir);
 
-			// Reflection
+			// Reflection: R = 2N dot (N dot L) - L
 			float3 reflectionVector = normalize(2.0 * s.Normal * NdotL - lightDir);
 
-			// Specular
+			// Specular: S = (R dot V)^p
 			float spec = pow(max(0, dot(reflectionVector, viewDir)), _SpecPower);
 			float3 finalSpec = _SpecularColor.rgb * spec;
 
-			// Final effect
+			// Final effect: I = D + S
 			fixed4 c;
 			c.rgb = (s.Albedo * _LightColor0.rgb * max(0, NdotL) * atten) + (_LightColor0.rgb * finalSpec);
 			c.a = s.Alpha;
