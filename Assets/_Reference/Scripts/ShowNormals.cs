@@ -1,15 +1,14 @@
 ﻿using UnityEngine;
 
 [ExecuteInEditMode]
-public class ShowNormals : MonoBehaviour {
-
+public class ShowNormals : MonoBehaviour 
+{
     public float length = 1;
-
     public Vector3 bias;
 
     // Update is called once per frame
-    void Update() {
-
+    void Update() 
+	{
         Mesh mesh = GetComponent<MeshFilter>().sharedMesh;
 
         Vector3[] vertices = mesh.vertices;
@@ -26,7 +25,8 @@ public class ShowNormals : MonoBehaviour {
             Debug.DrawLine
             (
                 pos,
-                pos + normals[i] * length, Color.red);
+                pos + normals[i] * length, Color.red
+			);
         }
     }
 }

@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
+[ExecuteInEditMode]
 public class ShowRays : MonoBehaviour 
 {
 	MeshFilter curFilter;

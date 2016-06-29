@@ -5,7 +5,7 @@
 		_MainTint ("Diffuse Tint", Color) = (1,1,1,1)
 		_MainTex ("Base (RGB)", 2D) = "white" {}
 		_SpecularColor ("Specular Color", Color) = (1,1,1,1)
-		_SpecPower ("Specular Power", Range(0,30)) = 1
+		_SpecPower ("Specular Power", Range(0,30)) = 1			// p
 	}
 	SubShader 
 	{
