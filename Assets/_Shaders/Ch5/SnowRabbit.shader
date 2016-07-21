@@ -18,7 +18,6 @@
 		
 		CGPROGRAM
 
-		#include "UnityCG.cginc"
 		#pragma surface surf Standard vertex:vert
 		//#pragma target 3.0
 
@@ -43,21 +42,20 @@
 		{
 			// perform vertex modification
 
-			// Convert the snow direction to world coordinates
-			//float3 vn = UnityObjectToWorldNormal(v.normal).xyz;
-			float3 vn = normalize(mul(_Object2World, float4(v.normal, 0))).xyz;
-			float3 sn = normalize(_SnowDirection.xyz);//normalize(mul(_Object2World, float4(_SnowDirection.xyz, 0))).xyz; //mul(UNITY_MATRIX_IT_MV, _SnowDirection);
+			float3 vn = v.normal.xyz;
+			// Convert the snow direction to object coordinates
+			float3 sn = normalize(mul(_World2Object, float4(_SnowDirection.xyz, 0))).xyz;
 
 			// snowAlignment is the amount that the vertex's normal aligns with the snow direction (-1 means opposite vector, +1 means identical vector)
 			float snowAlignment = dot(vn, sn);
 
-			if (snowAlignment > _SnowLevel)
+			if (snowAlignment >= _SnowLevel)
 			{
 				// _SnowPuffiness determines how much the vertex is offset by its normal vs the snow fall direction
-				float3 vertOffset = sn * vn;
+				float3 vertOffset = lerp(sn, vn, _SnowPuffiness); // normalize(sn + sn + vn);
 
 				// snowFactor determines how much snow this vertex should receive
-				float snowFactor = lerp(0, _SnowDepth, snowAlignment * snowAlignment);
+				float snowFactor = lerp(0, _SnowDepth, snowAlignment * snowAlignment * snowAlignment);
 
 				// vertex displacement calculation
 				v.vertex.xyz += vertOffset * snowFactor;
