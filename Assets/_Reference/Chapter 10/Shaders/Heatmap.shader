@@ -1,4 +1,6 @@
-﻿Shader "CookbookShaders/Chapter10/Heatmap" {
+﻿// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
+
+Shader "CookbookShaders/Chapter10/Heatmap" {
 		Properties{
 			_HeatTex("Texture", 2D) = "white" {}
 		}
@@ -23,7 +25,7 @@
 		vertOutput vert(vertInput input) {
 			vertOutput o;
 			o.pos = mul(UNITY_MATRIX_MVP, input.pos);
-			o.worldPos = mul(_Object2World, input.pos).xyz;
+			o.worldPos = mul(unity_ObjectToWorld, input.pos).xyz;
 			return o;
 		}
 

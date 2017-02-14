@@ -1,4 +1,6 @@
-﻿Shader "CookbookShaders/SnowRabbit" 
+﻿// Upgrade NOTE: replaced '_World2Object' with 'unity_WorldToObject'
+
+Shader "CookbookShaders/SnowRabbit" 
 {
 	Properties 
 	{
@@ -44,7 +46,7 @@
 
 			float3 vn = v.normal.xyz;
 			// Convert the snow direction to object coordinates
-			float3 sn = normalize(mul(_World2Object, float4(_SnowDirection.xyz, 0))).xyz;
+			float3 sn = normalize(mul(unity_WorldToObject, float4(_SnowDirection.xyz, 0))).xyz;
 
 			// snowAlignment is the amount that the vertex's normal aligns with the snow direction (-1 means opposite vector, +1 means identical vector)
 			float snowAlignment = dot(vn, sn);

@@ -17,7 +17,7 @@
 		#pragma target 3.0
 
 		// Removed to generate an error
-		//sampler2D _MainTex;
+		sampler2D _MainTex;
 
 		struct Input {
 			float2 uv_MainTex;

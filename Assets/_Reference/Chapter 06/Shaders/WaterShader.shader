@@ -1,4 +1,6 @@
-﻿Shader "CookbookShaders/Chapter06/WaterShader" 
+﻿// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
+
+Shader "CookbookShaders/Chapter06/WaterShader" 
 {
 	Properties 
 	{
@@ -61,7 +63,7 @@
 				o.color = v.color;
 				o.texcoord = v.texcoord;
 
-				o.worldPos = mul(_Object2World, v.vertex);
+				o.worldPos = mul(unity_ObjectToWorld, v.vertex);
 				o.uvgrab = ComputeGrabScreenPos(o.vertex);
 				
 				return o;
