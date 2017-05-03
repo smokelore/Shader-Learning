@@ -1,4 +1,4 @@
-﻿Shader "CookbookShaders/NormalExtrusion" 
+﻿Shader "CookbookShaders/Ch05/NormalExtrusion" 
 {
 	Properties 
 	{

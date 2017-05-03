@@ -1,4 +1,4 @@
-﻿Shader "CookbookShaders/SnakeyPlane" 
+﻿Shader "CookbookShaders/Ch05/SnakeyPlane" 
 {
 	Properties 
 	{
