@@ -9,11 +9,11 @@
 		_Magnitude ("Magnitude", Range(0, 5)) = 1
 		_Scale ("Scale", Range(0.001, 2)) = 0.1
 
-		_MovementX ("Movement X", Range(-1, 1)) = 0
-		_MovementY ("Movement Y", Range(-1, 1)) = 1
+		_MovementX ("Movement X", Range(-3, 3)) = 0
+		_MovementY ("Movement Y", Range(-3, 3)) = 1
 
-		_ScrollX ("Scroll X", Range(-1, 1)) = 0
-		_ScrollY ("Scroll Y", Range(-1, 1)) = 1
+		_ScrollX ("Scroll X", Range(-3, 3)) = 0
+		_ScrollY ("Scroll Y", Range(-3, 3)) = 1
 	}
 
 	SubShader
@@ -88,28 +88,19 @@
 			// Fragment function
 			half4 frag(vertOutput i) : COLOR
 			{
-				_Period *= 3;
+				//_Period /= 3;
 
-				float time = (_Time.y - floor(_Time.y / _Period) * _Period) / _Period;
+				float time = _Time.y / _Period; //(_Time.y - floor(_Time.y / _Period) * _Period) / _Period;
 
 				float sinT = sin(time);
 				float cosT = cos(time);
-
-				if (cosT <= 0)
-				{
-					sinT = sin(time + M_PI);
-					cosT = cos(time + M_PI);
-				}
-				
-				sinT = asin(sinT);
-				cosT = acos(cosT);
 
 				float2 distortion = float2
 				(
 					tex2D(_NoiseTexture, i.worldPos.xy / _Scale + float2(_ScrollX * sinT, _ScrollY * sinT) ).r - 0.5,
 					tex2D(_NoiseTexture, i.worldPos.xy / _Scale + float2(_MovementX * sinT, _MovementY * sinT) ).r - 0.5
 				);
-				i.uvgrab.xy -= distortion * _Magnitude;
+				i.uvgrab.xy += (1 + sinT * 0.5) * distortion * _Magnitude;
 
 				fixed4 col = tex2Dproj(_GrabTexture, UNITY_PROJ_COORD(i.uvgrab));
 				return col * _Color;
