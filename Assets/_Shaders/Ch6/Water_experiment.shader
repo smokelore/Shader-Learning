@@ -8,6 +8,12 @@
 		_Period ("Period", Range(0.001, 50)) = 5
 		_Magnitude ("Magnitude", Range(0, 5)) = 1
 		_Scale ("Scale", Range(0.001, 2)) = 0.1
+
+		_MovementX ("Movement X", Range(-1, 1)) = 0
+		_MovementY ("Movement Y", Range(-1, 1)) = 1
+
+		_ScrollX ("Scroll X", Range(-1, 1)) = 0
+		_ScrollY ("Scroll Y", Range(-1, 1)) = 1
 	}
 
 	SubShader
@@ -39,6 +45,12 @@
 			float _Period;
 			float _Magnitude;
 			float _Scale;
+			
+			float _MovementX;
+			float _MovementY;
+
+			float _ScrollX;
+			float _ScrollY;
 
 			#define M_PI 3.1415926535897932384626433832795
 
@@ -94,10 +106,10 @@
 
 				float2 distortion = float2
 				(
-					tex2D(_NoiseTexture, i.worldPos.xy / _Scale + float2(0/*sin(_Time.y)*/, sinT) ).r - 0.5,
-					tex2D(_NoiseTexture, i.worldPos.xy / _Scale + float2(0, sinT) ).r - 0.5
+					tex2D(_NoiseTexture, i.worldPos.xy / _Scale + float2(_ScrollX * sinT, _ScrollY * sinT) ).r - 0.5,
+					tex2D(_NoiseTexture, i.worldPos.xy / _Scale + float2(_MovementX * sinT, _MovementY * sinT) ).r - 0.5
 				);
-				i.uvgrab.xy += distortion * _Magnitude;
+				i.uvgrab.xy -= distortion * _Magnitude;
 
 				fixed4 col = tex2Dproj(_GrabTexture, UNITY_PROJ_COORD(i.uvgrab));
 				return col * _Color;
