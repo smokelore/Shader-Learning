@@ -1,4 +1,4 @@
-﻿Shader "CookbookShaders/Ch06/Water_experiment" 
+﻿Shader "CookbookShaders/Ch06/lavalampvibes" 
 {
 	Properties
 	{
