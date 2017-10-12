@@ -1,4 +1,6 @@
-﻿// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
+﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
+// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
 
 Shader "CookbookShaders/Chapter10/Heatmap" {
 		Properties{
@@ -24,7 +26,7 @@ Shader "CookbookShaders/Chapter10/Heatmap" {
 
 		vertOutput vert(vertInput input) {
 			vertOutput o;
-			o.pos = mul(UNITY_MATRIX_MVP, input.pos);
+			o.pos = UnityObjectToClipPos(input.pos);
 			o.worldPos = mul(unity_ObjectToWorld, input.pos).xyz;
 			return o;
 		}

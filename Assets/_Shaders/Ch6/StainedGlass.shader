@@ -1,4 +1,6 @@
-﻿Shader "CookbookShaders/Ch06/StainedGlass" 
+﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
+Shader "CookbookShaders/Ch06/StainedGlass" 
 {
 	Properties
 	{
@@ -50,7 +52,7 @@
 			vertOutput vert(vertInput v)
 			{
 				vertOutput o;
-				o.vertex = mul(UNITY_MATRIX_MVP, v.vertex);
+				o.vertex = UnityObjectToClipPos(v.vertex);
 				o.texcoord = v.texcoord;
 				o.uvgrab = ComputeGrabScreenPos(o.vertex);	// grab screen texture
 				return o;

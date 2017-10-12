@@ -1,4 +1,6 @@
-﻿Shader "CookbookShaders/Ch06/lavalampvibes" 
+﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
+Shader "CookbookShaders/Ch06/lavalampvibes" 
 {
 	Properties
 	{
@@ -75,7 +77,7 @@
 			vertOutput vert(vertInput v)
 			{
 				vertOutput o;
-				o.vertex = mul(UNITY_MATRIX_MVP, v.vertex);
+				o.vertex = UnityObjectToClipPos(v.vertex);
 				o.color = v.color;
 				o.texcoord = v.texcoord;
 				

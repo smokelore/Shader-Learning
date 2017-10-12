@@ -1,4 +1,6 @@
-﻿Shader "CookbookShaders/Chapter06/Multiply" {
+﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
+Shader "CookbookShaders/Chapter06/Multiply" {
 	Properties
 	{
 		_Color ("Color", Color) = (1,0,0,1)
@@ -26,7 +28,7 @@
 
 	vertOutput vert(vertInput input) {
 		vertOutput o;
-		o.pos = mul(UNITY_MATRIX_MVP, input.pos);
+		o.pos = UnityObjectToClipPos(input.pos);
 		o.texcoord = input.texcoord;
 		return o;
 	}

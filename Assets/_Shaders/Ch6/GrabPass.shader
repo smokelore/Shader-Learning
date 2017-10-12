@@ -1,4 +1,6 @@
-﻿Shader "CookbookShaders/Ch06/GrabPass" 
+﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
+Shader "CookbookShaders/Ch06/GrabPass" 
 {
 	SubShader
 	{
@@ -37,7 +39,7 @@
 			vertOutput vert(vertInput v)
 			{
 				vertOutput o;
-				o.vertex = mul(UNITY_MATRIX_MVP, v.vertex);
+				o.vertex = UnityObjectToClipPos(v.vertex);
 				o.uvgrab = ComputeGrabScreenPos(o.vertex);	// grab screen texture
 				return o;
 			}
